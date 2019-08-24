@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.j1904.mapper.IPermissionDao">
+    <select id="loadAll" resultType="com.qf.j1904.pojo.Permission">
+        select * from permission
+    </select>
+
+    <!--通过角色来获取拥有的权限-->
+    <select id="loadByRoleId" resultType="com.qf.j1904.pojo.Permission">
+        select * from permission where id in(select pid from role_permission_mapping where rid=#{roleId})
+    </select>
+
+    <!--//根据rid 来删除 role_permission表中 pid 对应的权限-->
+    <delete id="deletePidByRid" parameterType="int">
+        delete from role_permission_mapping where rid=#{rid}
+    </delete>
+    <!--//根据role_permission关系表 添加最终 所勾选的权限-->
+    <insert id="addPermission" parameterType="com.qf.j1904.pojo.Role_Permission">
+        insert into role_permission_mapping values(#{rid},#{pid})
+    </insert>
+    <!--//通过 pname  来获取 id-->
+    <select id="" resultType="int" parameterType="String">
+        select id from permission where pname=#{pname}
+    </select>
+</mapper>

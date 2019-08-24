@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<style>
+	.tree li {
+        list-style-type: none;
+		cursor:pointer;
+	}
+	table tbody tr:nth-child(odd){background:#F4F4F4;}
+	table tbody td:nth-child(even){color:#C00;}
+	</style>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div><a class="navbar-brand" style="font-size:32px;" href="#">电商平台 - 用户维护</a></div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li style="padding-top:8px;">
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
+					<i class="glyphicon glyphicon-user"></i> 张三 <span class="caret"></span>
+				  </button>
+					  <ul class="dropdown-menu" role="menu">
+						<li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
+						<li class="divider"></li>
+						<li><a href="index"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
+					  </ul>
+			    </div>
+			</li>
+            <li style="margin-left:10px;padding-top:8px;">
+				<button type="button" class="btn btn-default btn-danger">
+				  <span class="glyphicon glyphicon-question-sign"></span> 帮助
+				</button>
+			</li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+			<div class="tree">
+				<ul style="padding-left:0px;" class="list-group">
+					<li class="list-group-item tree-closed" >
+						<a href="main"><i class="glyphicon glyphicon-dashboard"></i> 控制面板</a>
+					</li>
+					<li class="list-group-item">
+						<span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span> 
+						<ul style="margin-top:10px;">
+							<li style="height:30px;">
+								<a href="user" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+							</li>
+							<li style="height:30px;">
+								<a href="role"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
+							</li>
+							<li style="height:30px;">
+								<a href="permission"><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
+							</li>
+						</ul>
+					</li>
+					<li class="list-group-item tree-closed">
+						<span><i class="glyphicon glyphicon-th-large"></i>商品业务<span class="badge" style="float:right">3</span></span>
+						<ul style="margin-top:10px;display:none;">
+							<li style="height:30px;">
+								<a href="auth_cert"><i class="glyphicon glyphicon-list"></i> 商品管理</a>
+							</li>
+							<li style="height:30px;">
+								<a href="auth_adv"><i class="glyphicon glyphicon-list"></i> 订单管理</a>
+							</li>
+							<!--<li style="height:30px;">
+								<a href="auth_project"><i class="glyphicon glyphicon-list"></i></a>
+							</li>-->
+						</ul>
+					</li>
+					<li class="list-group-item tree-closed">
+						<span><i class="glyphicon glyphicon-th-large"></i> 业务管理 <span class="badge" style="float:right">7</span></span> 
+						<ul style="margin-top:10px;display:none;">
+							<li style="height:30px;">
+								<a href="cert"><i class="glyphicon glyphicon-picture"></i> 资质维护</a>
+							</li>
+							<li style="height:30px;">
+								<a href="type"><i class="glyphicon glyphicon-equalizer"></i> 分类管理</a>
+							</li>
+							<li style="height:30px;">
+								<a href="process"><i class="glyphicon glyphicon-random"></i> 流程管理</a>
+							</li>
+							<li style="height:30px;">
+								<a href="advertisement"><i class="glyphicon glyphicon-hdd"></i> 广告管理</a>
+							</li>
+							<li style="height:30px;">
+								<a href="message"><i class="glyphicon glyphicon-comment"></i> 消息模板</a>
+							</li>
+							<li style="height:30px;">
+								<a href="project_type"><i class="glyphicon glyphicon-list"></i> 项目分类</a>
+							</li>
+							<li style="height:30px;">
+								<a href="tag"><i class="glyphicon glyphicon-tags"></i> 项目标签</a>
+							</li>
+						</ul>
+					</li>
+					<li class="list-group-item tree-closed" >
+						<a href="param"><i class="glyphicon glyphicon-list-alt"></i> 参数管理</a>
+					</li>
+				</ul>
+			</div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+				<h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
+			  </div>
+			  <div class="panel-body">
+<form class="form-inline" role="form" style="float:left;">
+  <div class="form-group has-feedback">
+    <div class="input-group">
+      <div class="input-group-addon">查询条件</div>
+      <input id="dimValue" name="dimValue" value="" class="form-control has-success" type="text" placeholder="请输入查询条件">
+    </div>
+  </div>
+  <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
+</form>
+<button type="button" id="delete" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
+<button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='add'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+<br>
+ <hr style="clear:both;">
+          <div class="table-responsive">
+            <table class="table  table-bordered">
+              <thead>
+                <tr >
+                  <th width="30">id</th>
+				  <th width="30"><input id="ids" type="checkbox"></th>
+                  <th>账号</th>
+                  <th>身份</th>
+                  <th>邮箱地址</th>
+                  <th width="100">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="u :${userList}">
+                  <td th:text="${u.userId}">1</td>
+				  <td><input th:value="${u.userId}" name="id" class="i" type="checkbox"></td>
+                  <td th:text="${u.userName}"></td>
+                  <td th:text="${u.identity}"></td>
+                  <td th:text="${u.mailbox}"></td>
+                  <td>
+				      <button th:value="${u.userId}" type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
+				      <button th:value="${u.userId}" type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
+					  <button th:value="${u.userId}" type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
+				  </td>
+                </tr>
+              </tbody>
+			  <tfoot>
+			     <tr >
+				     <td colspan="6" align="center">
+						<ul class="pagination">  <!--class="active"-->
+							    <!--//鼠标在某一个元素移动时持续触发-->
+							    <li class="active1" onmousemove="mouseEvent()"><a th:href="@{user(page=1)}">首页</a></li>
+								<li class="active1" onmousemove="mouseEvent()"><a th:href="@{user(page=${currentPage-1})}">上一页</a></li>
+								<li class="active1" onmousemove="mouseEvent()"><a th:href="@{user(page=1)}">1 <span class="sr-only">(current)</span></a></li>
+								<li class="active1" onmousemove="mouseEvent()"><a th:href="@{user(page=2)}">2</a></li>
+								<li class="active1" onmousemove="mouseEvent()"><a th:href="@{user(page=3)}">3</a></li>
+								<li class="active1" onmousemove="mouseEvent()"><a th:href="@{user(page=4)}">4</a></li>
+								<li class="active1" onmousemove="mouseEvent()"><a th:href="@{user(page=5)}">5</a></li>
+								<li class="active1" onmousemove="mouseEvent()"><a th:href="@{user(page=${currentPage+1})}">下一页</a></li>
+							    <li class="active1" onmousemove="mouseEvent()"><a th:href="@{user(page=${maxPage})}">末页</a></li>
+							 </ul>
+					 </td>
+				 </tr>
+
+			  </tfoot>
+            </table>
+          </div>
+			  </div>
+			</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="script/docs.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+			    $(".list-group-item").click(function(){
+				    if ( $(this).find("ul") ) {
+						$(this).toggleClass("tree-closed");
+						if ( $(this).hasClass("tree-closed") ) {
+							$("ul", this).hide("fast");
+						} else {
+							$("ul", this).show("fast");
+						}
+					}
+				});
+            });
+
+            $("#ids").click(function () {  //选取所有的操作
+				var bool=this.checked;     //获取当前每一个 被选中的复选框
+				$("input[name='id']").each(function () {  //获取每个被选中的userId 值
+					this.checked=bool;
+				});
+			});
+            $("#delete").click(function () {
+				var checked=$("input[type='checkbox']:checked").val([]); //获取每个被选中的userId 值
+				var names="";    //定义一个空的字符
+				for (var i=0;i<checked.length;i++){  //三元运算符  如果是最后一个就 取checked[i]值，如果不是 就取checked[i]值加逗号
+					names+=i==checked.length-1?checked[i].value:checked[i].value+",";
+				}
+				//alert(names);
+				$.post("batchDelete",{"ids":names},function (data) {  //Ajax异步提交服务器的方式
+					alert("删除成功");
+					window.location.reload();    //页面刷新作用
+				});
+			});
+
+            function mouseEvent(){
+            	this.backgroundColor="blue";
+			}
+
+             $(".btn-warning").click(function () {   //模糊查询操作
+				 var v=$("#dimValue").val();
+				 //alert(v);
+				 window.location.href="mhSelect?dimValue="+v;
+			 });
+
+            $("tbody .btn-success").click(function(){   //分配角色操作
+            	var uid=$(this).val();
+                window.location.href = "assignRole?uid="+uid;
+            });
+            $("tbody .btn-primary").click(function(){  //修改操作 获取修改数据
+				var uid=$(this).val();
+				//alert(uid);
+                window.location.href = "edit?uid="+uid;
+            });
+			$("tbody .btn-danger").click(function(){   //删除操作
+				var uid=$(this).val();
+				//window.location.href = "deleteUser?uid="+uid;      //直接提交服务端 方式
+				$.post("deleteUser",{"uid":uid},function (date) {    //Ajax异步提交服务器端 方式
+					alert(date?"删除成功":"删除失败");
+					window.location.reload();      //相当于刷新按作用
+				});
+			});
+        </script>
+  </body>
+</html>

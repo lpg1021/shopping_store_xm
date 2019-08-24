@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.j1904.mapper.IRoleDao">
+    <!--查询未分配的角色列表-->
+    <select id="noContainRole" resultType="com.qf.j1904.pojo.Role" parameterType="int">
+        SELECT * FROM tb_role WHERE roleId NOT IN(SELECT rid FROM user_role_mapping WHERE uid=#{uid})
+    </select>
+    <!--已分配的角色列表-->
+    <select id="containRole" resultType="com.qf.j1904.pojo.Role" parameterType="int">
+        SELECT * FROM tb_role WHERE roleId IN(SELECT rid FROM user_role_mapping WHERE uid=#{uid})
+    </select>
+
+    <!--查询所有的角色-->
+    <select id="loadAllRole" resultType="com.qf.j1904.pojo.Role">
+        select * from tb_role
+    </select>
+
+    <!--通过一个roleId  来查询一个角色对象-->
+    <select id="loadById" resultType="com.qf.j1904.pojo.Role" parameterType="int">
+        select * from tb_role where roleId=#{roleId}
+    </select>
+
+    <!--修改一个用户-->
+    <update id="updateRole" parameterType="com.qf.j1904.pojo.Role">
+        update tb_role set roleName=#{roleName} where roleId=#{roleId}
+    </update>
+
+    <!--添加一个角色-->
+    <insert id="addRole" parameterType="com.qf.j1904.pojo.Role">
+        insert into tb_role values(#{roleId},#{roleName})
+    </insert>
+    <!--通过 roleId 来删除一个用户-->
+    <delete id="deleteRole" parameterType="int">
+        delete from tb_role where roleId=#{roleId}
+    </delete>
+
+    <!--//添加到右边的已分配角色中-->
+    <insert id="addRight" parameterType="com.qf.j1904.pojo.User_Role_Mapping">
+        insert into user_role_mapping values(#{uid},#{rid})
+    </insert>
+    <!--//删除到左边的未分配角色中-->
+    <delete id="deleteLeft" parameterType="com.qf.j1904.pojo.User_Role_Mapping">
+        delete from user_role_mapping where uid=#{uid} and rid=#{rid}
+    </delete>
+    <!--//通过roleName来 查询roleId-->
+    <select id="queryRidByRoleName" resultType="int" parameterType="String">
+        select roleId from tb_role where roleName=#{roleName}
+    </select>
+
+    <!--//获取roleId  获取总条数-->
+    <select id="getTotalCount" resultType="int">
+        select count(roleId) from tb_role
+    </select>
+
+    <!--//根据roleName  模糊查询-->
+    <select id="selectByRoleName" resultType="com.qf.j1904.pojo.Role" parameterType="String">
+        select * from tb_role where roleName like  "%"#{mh}"%"
+    </select>
+</mapper>

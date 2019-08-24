@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.j1904.mapper.IUserDao">
+
+      <resultMap id="userResult" type="com.qf.j1904.pojo.User">
+           <id property="userId" column="userId"></id>
+           <result property="userName" column="userName"></result>
+           <result property="userPwd" column="userPwd"></result>
+           <result property="identity" column="identity"></result>
+           <result property="mailbox" column="mailbox"></result>
+
+      </resultMap>
+
+     <select id="loadByIdUser" resultMap="userResult" parameterType="int">
+         select * from users where userId=#{userId}
+     </select>
+
+    <select id="loadUser" resultType="com.qf.j1904.pojo.User" parameterType="com.qf.j1904.pojo.User">
+        select * from users where userName=#{userName} and userPwd=#{userPwd}
+    </select>
+
+     <!--获取所有的用户 -->
+     <select id="loadUserAll" resultType="com.qf.j1904.pojo.User">
+         select * from users
+     </select>
+     <!--添加一个用户-->
+     <insert id="addUser" parameterType="com.qf.j1904.pojo.User">
+         insert into users values(#{userId},#{userName},#{userPwd},#{identity},#{mailbox})
+     </insert>
+
+    <!--通过一个id获取用户对象-->
+    <select id="getUserById" resultType="com.qf.j1904.pojo.User" parameterType="int">
+        select * from users where userId=#{userId}
+    </select>
+     <!--修改一个用户-->
+     <update id="updateUser" parameterType="com.qf.j1904.pojo.User">
+         update users set userName=#{userName},userPwd=#{userPwd},identity=#{identity},mailbox=#{mailbox} where userId=#{userId}
+     </update>
+    <!--通过一个userId删除一个用户-->
+    <delete id="deleteUser" parameterType="int">
+        delete from users where userId=#{userId}
+    </delete>
+    <!--获取userId 的 总条数-->
+    <select id="getTotalCount" resultType="int">
+        select count(userId) from users
+    </select>
+
+    <!--//根据userName  模糊查询-->    <!--采用concat（）函数，它可以将多个字符串连接成一个字符-->
+    <select id="selectByUserName" resultType="com.qf.j1904.pojo.User" parameterType="String">
+        select * from users where userName like concat('%',#{mh},'%')
+    </select>
+    <!--//根据identity 模糊查询-->
+    <select id="selectByIdentity" resultType="com.qf.j1904.pojo.User" parameterType="String">
+        select * from users where identity like concat('%',#{mh},'%')
+    </select>
+     <!--//根据mailbox 模糊查询-->
+    <select id="selectByMailbox" resultType="com.qf.j1904.pojo.User" parameterType="String">
+        select * from users where mailbox like concat('%',#{mh},'%')
+    </select>
+</mapper>

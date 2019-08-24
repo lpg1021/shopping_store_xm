@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/login.css">
+	<style>
+
+	</style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <div><a class="navbar-brand" href="index.html" style="font-size:32px;">电商购物平台</a></div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <form action="regUser" class="form-signin" role="form">
+        <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户注册</h2>
+          <div class="form-group">
+              <label for="userName">登陆账号</label>
+              <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入登陆账号">
+          </div>
+          <div class="form-group">
+              <label for="userPwd">用户密码</label>
+              <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="请输入用户密码">
+          </div>
+          <!--<div class="form-group">
+              <label for="identity">用户身份</label>
+              <input type="text" class="form-control" id="identity" name="identity" placeholder="请输入用户身份">
+          </div>-->
+          <div class="form-group">
+              <label for="mailbox">邮箱地址</label>
+              <input type="email" class="form-control" id="mailbox" name="mailbox" placeholder="请输入邮箱地址">
+              <p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
+          </div>
+		  <div class="form-group has-success has-feedback">
+			<select id="identity" name="identity" class="form-control" >
+                <option>vip</option>
+                <option>admin</option>
+            </select>
+		  </div>
+        <div class="checkbox">
+          <label>
+            忘记密码
+          </label>
+          <label style="float:right">
+            <a href="loginview">我有账号</a>
+          </label>
+        </div>                 <!--href="member.html"-->
+      <!--  <a class="btn btn-lg btn-success btn-block"> 注册</a>-->
+          <button style="width: 300px; position: absolute;margin-left: 0px" class="btn btn-lg btn-success btn-block" >注册</button>
+      </form>
+    </div>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
